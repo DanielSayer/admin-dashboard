@@ -1,5 +1,13 @@
 import { motion } from "motion/react";
-import { ArrowUpRight, ToggleRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  ClipboardList,
+  Key,
+  Lock,
+  ToggleRight,
+  UserCog,
+  Variable,
+} from "lucide-react";
 import { Link } from "react-router";
 
 const features = [
@@ -11,6 +19,46 @@ const features = [
     icon: ToggleRight,
     url: "/dashboard/feature-toggles",
     color: "from-[#000000] to-[#3B3B3B]",
+  },
+  {
+    id: 2,
+    name: "Permissions",
+    description: "Configure and manage user permissions",
+    icon: UserCog,
+    url: "/dashboard/permissions",
+    color: "from-[#007ACC] to-[#2F74C0]",
+  },
+  {
+    id: 3,
+    name: "Subscription Management",
+    description: "Manage subscription access modules and plans",
+    icon: Lock,
+    url: "/dashboard/subscriptions",
+    color: "from-[#38BDF8] to-[#818CF8]",
+  },
+  {
+    id: 4,
+    name: "Analytics",
+    description: "Track user activity and performance",
+    icon: ClipboardList,
+    url: "/dashboard/analytics",
+    color: "from-[#000000] to-[#3B3B3B]",
+  },
+  {
+    id: 5,
+    name: "API Keys",
+    description: "Securely manage API keys for your application",
+    icon: Key,
+    url: "/dashboard/api-keys",
+    color: "from-[#0066FF] to-[#00CCFF]",
+  },
+  {
+    id: 6,
+    name: "Environment Variables",
+    description: "Manage environment variables for your application",
+    icon: Variable,
+    url: "/dashboard/environment-variables",
+    color: "from-[#FF4F00] to-[#FF8A00]",
   },
 ];
 
