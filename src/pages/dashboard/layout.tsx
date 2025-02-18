@@ -6,7 +6,7 @@ export function DashboardLayout() {
   return (
     <SidebarProvider>
       <DashboardSidebar />
-      <SidebarInset>
+      <SidebarInset className="p-4">
         <Outlet />
       </SidebarInset>
     </SidebarProvider>

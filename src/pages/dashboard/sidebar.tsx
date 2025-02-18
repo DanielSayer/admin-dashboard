@@ -10,8 +10,18 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ToggleRight } from "lucide-react";
-import { Link } from "react-router";
+import {
+  ClipboardList,
+  Key,
+  Lock,
+  Receipt,
+  Settings,
+  Sparkles,
+  ToggleRight,
+  UserCog,
+  Variable,
+} from "lucide-react";
+import { Link, useLocation } from "react-router";
 
 const features = [
   {
@@ -19,22 +29,102 @@ const features = [
     to: "/dashboard/feature-toggles",
     icon: ToggleRight,
   },
+  {
+    title: "Permissions",
+    to: "/dashboard/permissions",
+    icon: UserCog,
+  },
+  {
+    title: "Subscriptions",
+    to: "/dashboard/subscriptions",
+    icon: Lock,
+  },
+  {
+    title: "Analytics",
+    to: "/dashboard/analytics",
+    icon: ClipboardList,
+  },
+  {
+    title: "Api Keys",
+    to: "/dashboard/api-keys",
+    icon: Key,
+  },
+  {
+    title: "Environment Variables",
+    to: "/dashboard/environment-variables",
+    icon: Variable,
+  },
+];
+
+const yourAccountFeatures = [
+  {
+    title: "Profile",
+    to: "/dashboard/profile",
+    icon: UserCog,
+  },
+  {
+    title: "Billing",
+    to: "/dashboard/billing",
+    icon: Receipt,
+  },
+  {
+    title: "Settings",
+    to: "/dashboard/settings",
+    icon: Settings,
+  },
 ];
 
 export function DashboardSidebar() {
+  const location = useLocation();
+
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader>admin dashboard</SidebarHeader>
+    <Sidebar
+      collapsible="icon"
+      className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
+    >
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link to="/dashboard">
+                <Sparkles className="mr-2 h-5 w-5" />
+                <span>admin dashboard</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Features</SidebarGroupLabel>
           <SidebarMenu>
             {features.map((feature) => (
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  asChild
+                  isActive={location.pathname === feature.to}
+                >
                   <Link to={feature.to}>
                     <feature.icon className="mr-2 h-5 w-5" />
-                    {feature.title}
+                    <span>{feature.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Your Account</SidebarGroupLabel>
+          <SidebarMenu>
+            {yourAccountFeatures.map((item) => (
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={location.pathname === item.to}
+                >
+                  <Link to={item.to}>
+                    <item.icon className="mr-2 h-5 w-5" />
+                    <span>{item.title}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

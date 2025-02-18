@@ -10,6 +10,7 @@ import HomePage from "./pages/home/page.tsx";
 import PageWrapper from "./components/layout/page-wrapper.tsx";
 import { DashboardLayout } from "./pages/dashboard/layout.tsx";
 import { DashboardPage } from "./pages/dashboard/page.tsx";
+import { FeatureTogglesPage } from "./pages/dashboard/feature-toggles/page.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,10 +22,14 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/sign-in" element={<SignInPage />} />
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route
+                path="/dashboard/feature-toggles"
+                element={<FeatureTogglesPage />}
+              />
             </Route>
           </Route>
         </Routes>
       </BrowserRouter>
     </Providers>
-  </StrictMode>
+  </StrictMode>,
 );
