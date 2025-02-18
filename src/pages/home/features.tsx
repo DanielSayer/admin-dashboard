@@ -68,11 +68,11 @@ export function Features() {
       {/* Section Header */}
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 dark:from-white dark:via-blue-300 dark:to-white pb-2">
-          Built with Modern Tech Stack
+          Feature Rich
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-          Powered by the latest technologies to ensure scalability, security,
-          and developer experience.
+          Built to include all the features you need to manage your cutting edge
+          SaaS application.
         </p>
       </div>
 

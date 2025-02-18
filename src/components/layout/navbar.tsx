@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
 import { ThemeToggle } from "../providers/theme/theme-toggle";
-import { useAuth, UserProfile } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { UserProfile } from "./user-profile";
 
 export default function NavBar() {
   const { userId } = useAuth();
