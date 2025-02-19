@@ -9,7 +9,7 @@ import { ChevronDown, ChevronUp, Ghost } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FeatureToggleCard } from "./feature-toggle-card";
 import { getSubscribers } from "@/server/subscribers";
-import { FilterFormData, FilterPanel } from "./filter-panel";
+import { Filters, FilterPanel } from "./filter-panel";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "motion/react";
 import { NewFeatureToggleDialog } from "./new-feature-toggle-dialog";
@@ -61,7 +61,7 @@ export function FeatureTogglesPage() {
     setFeatureToggles((prev) => prev.filter((x) => x.name !== value));
   };
 
-  const handleFilter = async (data: FilterFormData) => {
+  const handleFilter = async (data: Filters) => {
     await mutateAsync(data);
   };
 

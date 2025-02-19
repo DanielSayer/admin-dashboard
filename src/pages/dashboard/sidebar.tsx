@@ -17,6 +17,7 @@ import {
   Receipt,
   Settings,
   Sparkles,
+  ToggleLeft,
   ToggleRight,
   UserCog,
   Variable,
@@ -28,6 +29,11 @@ const features = [
     title: "Feature Toggles",
     to: "/dashboard/feature-toggles",
     icon: ToggleRight,
+  },
+  {
+    title: "Feature Flags",
+    to: "/dashboard/feature-flags",
+    icon: ToggleLeft,
   },
   {
     title: "Permissions",

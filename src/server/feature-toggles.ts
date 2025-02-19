@@ -3,7 +3,7 @@ import {
   featureToggleDefaults,
 } from "@/lib/mock-data/feature-toggles";
 import { mimicServerCall } from "./lib";
-import { FilterFormData } from "@/pages/dashboard/feature-toggles/filter-panel";
+import { Filters } from "@/pages/dashboard/feature-toggles/filter-panel";
 import { differenceInDays, format } from "date-fns";
 import { NewFeatureToggleFormData } from "@/pages/dashboard/feature-toggles/new-feature-toggle-dialog";
 
@@ -50,17 +50,15 @@ export const saveFeatureToggle = async (featureToggle: FeatureToggle) => {
 };
 
 export const filterFeatureToggles = async (
-  filter: FilterFormData,
+  filter?: Filters,
 ): Promise<FeatureToggle[]> => {
-  await mimicServerCall();
-  const savedFeatureToggles = localStorage.getItem("featureToggles");
-  if (!savedFeatureToggles) return [];
+  const featureToggles = await getFeatureToggles();
 
-  const parsedFeatureToggles = JSON.parse(
-    savedFeatureToggles,
-  ) as FeatureToggle[];
+  if (!filter) {
+    return featureToggles;
+  }
 
-  const filteredFeatureToggles = parsedFeatureToggles.filter((x) => {
+  const filteredFeatureToggles = featureToggles.filter((x) => {
     const filterExistanceTime = differenceInDays(
       new Date(),
       new Date(x.creationDate),

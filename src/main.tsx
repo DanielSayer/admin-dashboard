@@ -11,6 +11,7 @@ import PageWrapper from "./components/layout/page-wrapper.tsx";
 import { DashboardLayout } from "./pages/dashboard/layout.tsx";
 import { DashboardPage } from "./pages/dashboard/page.tsx";
 import { FeatureTogglesPage } from "./pages/dashboard/feature-toggles/page.tsx";
+import { FeatureFlagsPage } from "./pages/dashboard/feature-flags/page.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -25,6 +26,10 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path="/dashboard/feature-toggles"
                 element={<FeatureTogglesPage />}
+              />
+              <Route
+                path="/dashboard/feature-flags"
+                element={<FeatureFlagsPage />}
               />
               <Route path="/dashboard/*" element={<div>Not implemented</div>} />
             </Route>
