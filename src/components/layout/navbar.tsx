@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
 import { ThemeToggle } from "../providers/theme/theme-toggle";
-import { useAuth } from "@clerk/clerk-react";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
 import { UserProfile } from "./user-profile";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function NavBar() {
-  const { userId } = useAuth();
+  const { user } = useAuth();
 
   return (
     <motion.div
@@ -26,7 +26,7 @@ export default function NavBar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          {!userId && (
+          {!user && (
             <Link to="/sign-in">
               <Button
                 variant="default"
@@ -36,7 +36,7 @@ export default function NavBar() {
               </Button>
             </Link>
           )}
-          {userId && <UserProfile />}
+          {user && <UserProfile />}
         </div>
       </div>
     </motion.div>
