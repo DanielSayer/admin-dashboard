@@ -71,7 +71,14 @@ export const filterFeatureToggles = async (
     )
       return false;
     if (filter.module && filter.module !== x.module) return false;
-    if (filter.subscriber && filter.subscriber !== x.name) return false;
+    if (filter.subscriber) {
+      if (
+        x.enabledFor !== -1 &&
+        !x.enabledFor.includes(parseInt(filter.subscriber))
+      ) {
+        return false;
+      }
+    }
     if (filter.description && !x.description.includes(filter.description))
       return false;
     if (filter.enabledForAll && x.enabledFor !== -1) return false;
