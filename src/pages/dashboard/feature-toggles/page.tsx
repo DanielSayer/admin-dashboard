@@ -6,7 +6,7 @@ import {
 } from "@/server/feature-toggles";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, Ghost } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FeatureToggleCard } from "./feature-toggle-card";
 import { getSubscribers } from "@/server/subscribers";
 import { FilterFormData, FilterPanel } from "./filter-panel";
@@ -15,17 +15,28 @@ import { AnimatePresence, motion } from "motion/react";
 
 export function FeatureTogglesPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([]);
   const { data, isLoading } = useQuery({
     queryKey: ["feature-toggles"],
     queryFn: getFeatureToggles,
   });
 
+  useEffect(() => {
+    if (!data) return;
+
+    setFeatureToggles((prev) =>
+      prev.map((x) => {
+        const toggle = data.find((y) => y.name === x.name);
+        if (!toggle) return x;
+        return toggle;
+      }),
+    );
+  }, [data]);
+
   const { data: subscribers } = useQuery({
     queryKey: ["subscribers"],
     queryFn: getSubscribers,
   });
-
-  const [featureToggles, setFeatureToggles] = useState<FeatureToggle[]>([]);
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: filterFeatureToggles,

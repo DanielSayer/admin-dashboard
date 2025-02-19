@@ -31,13 +31,6 @@ export function FeatureToggleEditor({
     })
     .map((x) => ({ label: x.name, value: x.id.toString() }));
 
-  const removeableSubscribers = subscribers
-    .filter((x) => {
-      if (updatedFeatureToggle.enabledFor === -1) return false;
-      return updatedFeatureToggle.enabledFor.includes(x.id);
-    })
-    .map((x) => ({ label: x.name, value: x.id.toString() }));
-
   const onAddSubscriber = (value: string) => {
     setUpdatedFeatureToggle((prev) => {
       if (prev.enabledFor === -1) return prev;
@@ -48,12 +41,12 @@ export function FeatureToggleEditor({
     });
   };
 
-  const onRemoveSubscriber = (value: string) => {
+  const onRemoveSubscriber = (subscriberId: string) => {
     setUpdatedFeatureToggle((prev) => {
       if (prev.enabledFor === -1) return prev;
       return {
         ...prev,
-        enabledFor: prev.enabledFor.filter((x) => x !== parseInt(value)),
+        enabledFor: prev.enabledFor.filter((x) => x !== parseInt(subscriberId)),
       };
     });
   };
@@ -82,16 +75,6 @@ export function FeatureToggleEditor({
             placeholder="Add a subscriber"
           />
         </div>
-        <div className="space-y-2">
-          <label htmlFor="remove">Remove</label>
-          <Combobox
-            id="remove"
-            buttonClassName="w-full"
-            options={removeableSubscribers}
-            onChange={onRemoveSubscriber}
-            placeholder="Remove a subscriber"
-          />
-        </div>
         <div className="flex items-center space-x-2 px-10">
           <Checkbox
             id="all"
@@ -109,6 +92,10 @@ export function FeatureToggleEditor({
         <div className="col-span-3 flex flex-col gap-4">
           <h4 className="text-md">Result</h4>
           <SubscriberRenderer
+            editing={{
+              isEditing: true,
+              onRemove: onRemoveSubscriber,
+            }}
             toggleName={updatedFeatureToggle.name}
             enabledFor={updatedFeatureToggle.enabledFor}
             subscribers={subscribers}

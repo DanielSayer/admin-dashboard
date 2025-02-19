@@ -1,18 +1,24 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { FeatureToggleSubscriberList } from "@/lib/mock-data/feature-toggles";
 import { Subscriber } from "@/lib/mock-data/subscribers";
-import { Ghost, PartyPopper } from "lucide-react";
+import { Ghost, PartyPopper, X } from "lucide-react";
 
 type SubscriberCountRendererProps = {
   toggleName: string;
   enabledFor: FeatureToggleSubscriberList;
   subscribers: Subscriber[];
+  editing?: {
+    isEditing: boolean;
+    onRemove: (subscriberId: string) => void;
+  };
 };
 
 export function SubscriberRenderer({
   toggleName,
   enabledFor,
   subscribers,
+  editing,
 }: SubscriberCountRendererProps) {
   if (enabledFor === -1) {
     return (
@@ -39,9 +45,24 @@ export function SubscriberRenderer({
   return (
     <div className="grid max-h-48 w-full grid-cols-3 gap-2 rounded border p-4">
       {enabledFor.map((subscriberId) => (
-        <div key={`${toggleName}-${subscriberId}`}>
-          <Badge>{subscribers.find((x) => x.id === subscriberId)?.name}</Badge>
-        </div>
+        <Badge
+          key={`${toggleName}-${subscriberId}`}
+          className="justify-between"
+        >
+          {subscribers.find((x) => x.id === subscriberId)?.name}
+          {editing?.isEditing && (
+            <Button
+              onClick={() => editing.onRemove(subscriberId.toString())}
+              size="icon"
+              variant="ghost"
+              aria-label="Remove subscriber"
+              type="button"
+              className="h-4 w-4 hover:bg-destructive/50"
+            >
+              <X className="h-2 w-2 text-destructive" />
+            </Button>
+          )}
+        </Badge>
       ))}
     </div>
   );
