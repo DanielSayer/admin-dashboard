@@ -185,6 +185,21 @@ export function Billing() {
       actionLabel: "Get Pro",
       popular: true,
     },
+    {
+      title: "Pro Max",
+      monthlyPrice: 3,
+      yearlyPrice: 10,
+      description:
+        "Even more advanced features for growing teams and businesses.",
+      features: [
+        "All Pro features",
+        "Up to 99 team members",
+        "69GB storage",
+        "Priority support",
+        "Advanced analytics",
+      ],
+      actionLabel: "Get Pro Max",
+    },
   ];
 
   return (
@@ -200,7 +215,7 @@ export function Billing() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mt-10 flex justify-center"
+          className="mt-10 flex justify-center gap-4"
         >
           {plans.map((plan) => (
             <PricingCard key={plan.title} {...plan} planLength={planLength} />
