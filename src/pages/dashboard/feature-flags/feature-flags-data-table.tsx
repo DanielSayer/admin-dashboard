@@ -75,7 +75,7 @@ export function FeatureFlagsDataTable<TValue>({
           ))}
         </TableHeader>
         <TableBody>
-          {isLoading && (
+          {isLoading ? (
             <>
               <TableRow>
                 <TableCell colSpan={columns.length}>
@@ -93,8 +93,7 @@ export function FeatureFlagsDataTable<TValue>({
                 </TableCell>
               </TableRow>
             </>
-          )}
-          {table.getRowModel().rows?.length ? (
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <Fragment key={row.id}>
                 <TableRow data-state={row.getIsSelected() && "selected"}>

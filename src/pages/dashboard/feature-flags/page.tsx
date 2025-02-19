@@ -67,7 +67,7 @@ export function FeatureFlagsPage() {
         columns={columns}
         data={data ?? []}
         subscribers={subscribers ?? []}
-        isLoading={isLoading || isSubscribersLoading}
+        isLoading={isLoading || isSubscribersLoading || isRefetching}
       />
     </div>
   );
