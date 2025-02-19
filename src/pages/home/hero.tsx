@@ -6,7 +6,7 @@ import { Link } from "react-router";
 export function Hero() {
   return (
     <section
-      className="relative flex flex-col items-center justify-center py-60"
+      className="relative flex flex-col items-center justify-center py-20"
       aria-label="The Ultimate Admin Dashboard Hero"
     >
       {/* Background gradient */}

@@ -15,14 +15,25 @@ export const columns: ColumnDef<FeatureToggle>[] = [
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Name" />;
     },
+    cell: ({ getValue }) => {
+      const value = getValue() as string;
+
+      return <div className="truncate">{value}</div>;
+    },
     sortingFn: "alphanumeric",
+    size: 25,
   },
   {
     accessorKey: "description",
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Description" />;
     },
-    size: 500,
+    cell: ({ getValue }) => {
+      const value = getValue() as string;
+
+      return <div className="line-clamp-3">{value}</div>;
+    },
+    size: 40,
   },
   {
     accessorKey: "enabledFor",
@@ -38,12 +49,14 @@ export const columns: ColumnDef<FeatureToggle>[] = [
 
       return `${value.length} clients`;
     },
+    size: 10,
   },
   {
     accessorKey: "module",
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Module" />;
     },
+    size: 10,
   },
   {
     accessorKey: "creationDate",
@@ -55,6 +68,7 @@ export const columns: ColumnDef<FeatureToggle>[] = [
       const lifeLength = differenceInDays(new Date(), new Date(value));
       return `${lifeLength} days`;
     },
+    size: 10,
   },
   {
     id: "expander",
@@ -72,10 +86,8 @@ export const columns: ColumnDef<FeatureToggle>[] = [
             )}
           />
         </Button>
-      ) : (
-        "pp"
-      );
+      ) : null;
     },
-    size: 10,
+    size: 5,
   },
 ];

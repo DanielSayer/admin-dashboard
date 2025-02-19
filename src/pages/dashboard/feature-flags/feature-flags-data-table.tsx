@@ -41,6 +41,9 @@ export function FeatureFlagsDataTable<TValue>({
   const table = useReactTable({
     data,
     columns,
+    defaultColumn: {
+      minSize: 5,
+    },
     getRowCanExpand: () => true,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -61,7 +64,7 @@ export function FeatureFlagsDataTable<TValue>({
                 return (
                   <TableHead
                     key={header.id}
-                    style={{ width: header.getSize() }}
+                    style={{ width: `${header.getSize()}%` }}
                   >
                     {header.isPlaceholder
                       ? null
