@@ -109,6 +109,7 @@ export function FeatureToggleEditor({
         <div className="col-span-3 flex flex-col gap-4">
           <h4 className="text-md">Result</h4>
           <SubscriberRenderer
+            toggleName={updatedFeatureToggle.name}
             enabledFor={updatedFeatureToggle.enabledFor}
             subscribers={subscribers}
           />

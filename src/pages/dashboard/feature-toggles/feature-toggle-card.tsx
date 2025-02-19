@@ -100,6 +100,7 @@ const FeatureToggleCardViewer = ({
       <div className="col-span-3 flex flex-col gap-4">
         <h4 className="text-md">Current Subscribers</h4>
         <SubscriberRenderer
+          toggleName={featureToggle.name}
           enabledFor={featureToggle.enabledFor}
           subscribers={subscribers}
         />

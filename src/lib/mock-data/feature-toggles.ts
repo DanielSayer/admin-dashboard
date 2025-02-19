@@ -1,5 +1,8 @@
 type EnabledForAllSubscribers = -1;
-type Module = "PocketWatch" | "Genius" | "ARM";
+
+export const modules = ["PocketWatch", "Genius", "ARM"] as const;
+type Module = (typeof modules)[number];
+
 export type FeatureToggleSubscriberList = number[] | EnabledForAllSubscribers;
 
 export type FeatureToggle = {
@@ -23,7 +26,7 @@ export const featureToggleDefaults: FeatureToggle[] = [
     name: "TransportSummaryPanel",
     description: "Shows the transport summary panel in Check in/out page",
     enabledFor: [1],
-    creationDate: "2023-01-01",
+    creationDate: "2024-10-10",
     module: "PocketWatch",
   },
   {
@@ -31,14 +34,14 @@ export const featureToggleDefaults: FeatureToggle[] = [
     description:
       "When enabled, there will be a setting in Shifts to allows Roster Managers to ensure that a staff member adds notes before checking out of their shift",
     enabledFor: -1,
-    creationDate: "2023-01-01",
+    creationDate: "2025-02-18",
     module: "PocketWatch",
   },
   {
     name: "genius_show_bank_details_for_hicaps_v2",
     description: "When enabled, will show the bank detail when running the OCR",
     enabledFor: [],
-    creationDate: "2023-01-01",
+    creationDate: "2021-01-01",
     module: "Genius",
   },
   {
@@ -46,7 +49,7 @@ export const featureToggleDefaults: FeatureToggle[] = [
     description:
       "Configures whether the subscriber will be using the new icons",
     enabledFor: [1, 2, 3, 4, 5, 6, 7, 8],
-    creationDate: "2023-01-01",
+    creationDate: "2024-10-01",
     module: "ARM",
   },
 ];

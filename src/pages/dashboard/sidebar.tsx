@@ -99,7 +99,7 @@ export function DashboardSidebar() {
           <SidebarGroupLabel>Features</SidebarGroupLabel>
           <SidebarMenu>
             {features.map((feature) => (
-              <SidebarMenuItem>
+              <SidebarMenuItem key={feature.title}>
                 <SidebarMenuButton
                   asChild
                   isActive={location.pathname === feature.to}
@@ -117,7 +117,7 @@ export function DashboardSidebar() {
           <SidebarGroupLabel>Your Account</SidebarGroupLabel>
           <SidebarMenu>
             {yourAccountFeatures.map((item) => (
-              <SidebarMenuItem>
+              <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
                   isActive={location.pathname === item.to}

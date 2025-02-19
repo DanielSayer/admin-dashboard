@@ -4,11 +4,13 @@ import { Subscriber } from "@/lib/mock-data/subscribers";
 import { Ghost, PartyPopper } from "lucide-react";
 
 type SubscriberCountRendererProps = {
+  toggleName: string;
   enabledFor: FeatureToggleSubscriberList;
   subscribers: Subscriber[];
 };
 
 export function SubscriberRenderer({
+  toggleName,
   enabledFor,
   subscribers,
 }: SubscriberCountRendererProps) {
@@ -37,7 +39,7 @@ export function SubscriberRenderer({
   return (
     <div className="grid max-h-48 w-full grid-cols-3 gap-2 rounded border p-4">
       {enabledFor.map((subscriberId) => (
-        <div>
+        <div key={`${toggleName}-${subscriberId}`}>
           <Badge>{subscribers.find((x) => x.id === subscriberId)?.name}</Badge>
         </div>
       ))}
