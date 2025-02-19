@@ -21,6 +21,7 @@ import { FeatureToggleCard } from "./feature-toggle-card";
 import { Subscriber } from "@/lib/mock-data/subscribers";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FeatureToggle } from "@/lib/mock-data/feature-toggles";
+import { AnimatePresence, motion } from "motion/react";
 
 interface DataTableProps<TValue> {
   columns: ColumnDef<FeatureToggle, TValue>[];
@@ -98,7 +99,7 @@ export function FeatureFlagsDataTable<TValue>({
               <Fragment key={row.id}>
                 <TableRow data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell>
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
@@ -106,19 +107,29 @@ export function FeatureFlagsDataTable<TValue>({
                     </TableCell>
                   ))}
                 </TableRow>
-                {row.getIsExpanded() && (
-                  <TableRow className="hover:bg-transparent">
-                    <TableCell
-                      colSpan={row.getVisibleCells().length}
-                      className="p-2"
-                    >
-                      <FeatureToggleCard
-                        subscribers={subscribers}
-                        featureToggle={row.original}
-                      />
-                    </TableCell>
-                  </TableRow>
-                )}
+                <AnimatePresence>
+                  {row.getIsExpanded() && (
+                    <TableRow className="hover:bg-transparent">
+                      <TableCell
+                        colSpan={row.getVisibleCells().length}
+                        className="p-2"
+                      >
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <FeatureToggleCard
+                            subscribers={subscribers}
+                            featureToggle={row.original}
+                          />
+                        </motion.div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </AnimatePresence>
               </Fragment>
             ))
           ) : (

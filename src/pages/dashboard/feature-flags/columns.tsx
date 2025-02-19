@@ -4,9 +4,10 @@ import {
   FeatureToggle,
   FeatureToggleSubscriberList,
 } from "@/lib/mock-data/feature-toggles";
+import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { differenceInDays } from "date-fns";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export const columns: ColumnDef<FeatureToggle>[] = [
   {
@@ -64,7 +65,12 @@ export const columns: ColumnDef<FeatureToggle>[] = [
           size="icon"
           onClick={row.getToggleExpandedHandler()}
         >
-          {row.getIsExpanded() ? <ChevronUp /> : <ChevronDown />}
+          <ChevronDown
+            className={cn(
+              "transition-transform duration-200",
+              row.getIsExpanded() ? "rotate-180" : "rotate-0",
+            )}
+          />
         </Button>
       ) : (
         "pp"
