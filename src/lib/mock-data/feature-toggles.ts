@@ -1,15 +1,16 @@
 type EnabledForAllSubscribers = -1;
 type Module = "PocketWatch" | "Genius" | "ARM";
+export type FeatureToggleSubscriberList = number[] | EnabledForAllSubscribers;
 
-type FeatureToggle = {
+export type FeatureToggle = {
   name: string;
   description: string;
-  enabledFor: number[] | EnabledForAllSubscribers;
+  enabledFor: FeatureToggleSubscriberList;
   creationDate: string;
   module: Module;
 };
 
-export const featureToggles: FeatureToggle[] = [
+export const featureToggleDefaults: FeatureToggle[] = [
   {
     name: "PW_ReportsHub",
     description:

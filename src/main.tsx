@@ -26,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
                 path="/dashboard/feature-toggles"
                 element={<FeatureTogglesPage />}
               />
+              <Route path="/dashboard/*" element={<div>Not implemented</div>} />
             </Route>
           </Route>
         </Routes>

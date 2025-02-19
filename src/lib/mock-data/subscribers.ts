@@ -1,9 +1,9 @@
-type Subscriber = {
+export type Subscriber = {
   id: number;
   name: string;
 };
 
-export const subscribers: Subscriber[] = [
+export const defaultSubscriberData: Subscriber[] = [
   {
     id: 1,
     name: "My Healthcare Provider",
@@ -23,6 +23,10 @@ export const subscribers: Subscriber[] = [
   {
     id: 5,
     name: "LLC Support",
+  },
+  {
+    id: 6,
+    name: "My LLC",
   },
   {
     id: 7,
