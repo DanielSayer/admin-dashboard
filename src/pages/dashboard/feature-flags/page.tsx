@@ -13,8 +13,9 @@ import { NewFeatureToggleDialog } from "./new-feature-toggle-dialog";
 export function FeatureFlagsPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [filters, setFilters] = useState<Filters | undefined>();
+  const [isManuallyRefetching, setIsManuallyRefetching] = useState(false);
 
-  const { data, isLoading, isRefetching } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["feature-toggles", filters],
     queryFn: () => filterFeatureToggles(filters),
   });
@@ -26,6 +27,9 @@ export function FeatureFlagsPage() {
 
   const handleFilter = async (data: Filters) => {
     setFilters(data);
+    setIsManuallyRefetching(true);
+    await refetch();
+    setIsManuallyRefetching(false);
   };
 
   return (
@@ -58,7 +62,10 @@ export function FeatureFlagsPage() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <FilterPanel isFiltering={isRefetching} onSubmit={handleFilter} />
+            <FilterPanel
+              isFiltering={isManuallyRefetching}
+              onSubmit={handleFilter}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -67,7 +74,7 @@ export function FeatureFlagsPage() {
         columns={columns}
         data={data ?? []}
         subscribers={subscribers ?? []}
-        isLoading={isLoading || isSubscribersLoading || isRefetching}
+        isLoading={isLoading || isSubscribersLoading || isManuallyRefetching}
       />
     </div>
   );
