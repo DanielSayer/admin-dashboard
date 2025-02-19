@@ -6,6 +6,10 @@ This is a simple admin dashboard built, to demonstrate how to manage feature tog
 
 There are multiple feature pages, and billing page, although these are not, and likely will not be implemented, as feature toggles is the sole purpose of this project.
 
+## Notes
+
+As this was a demo project, responsivness is not a priority, and it is intended to be used on a desktop browser.
+
 ## How to run
 
 1. Clone the repo
