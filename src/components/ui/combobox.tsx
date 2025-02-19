@@ -56,7 +56,9 @@ export function Combobox({
           role="combobox"
           id={id}
           aria-expanded={open}
-          className={cn("w-96 justify-between", buttonClassName)}
+          className={cn("w-96 justify-between", buttonClassName, {
+            "text-muted-foreground": !value,
+          })}
         >
           {value
             ? options.find((option) => option.value === value)?.label

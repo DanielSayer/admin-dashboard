@@ -1,7 +1,9 @@
 type EnabledForAllSubscribers = -1;
 
-export const modules = ["PocketWatch", "Genius", "ARM"] as const;
-type Module = (typeof modules)[number];
+const modules = ["PocketWatch", "Genius", "ARM"] as const;
+export const moduleList = modules.map((x) => ({ label: x, value: x }));
+
+export type Module = (typeof modules)[number];
 
 export type FeatureToggleSubscriberList = number[] | EnabledForAllSubscribers;
 

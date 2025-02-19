@@ -10,13 +10,11 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { modules } from "@/lib/mock-data/feature-toggles";
+import { moduleList } from "@/lib/mock-data/feature-toggles";
 import { getSubscribers } from "@/server/subscribers";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-
-const moduleList = modules.map((x) => ({ label: x, value: x }));
 
 export type FilterFormData = {
   module?: string;

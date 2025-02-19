@@ -4,7 +4,8 @@ import {
 } from "@/lib/mock-data/feature-toggles";
 import { mimicServerCall } from "./lib";
 import { FilterFormData } from "@/pages/dashboard/feature-toggles/filter-panel";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
+import { NewFeatureToggleFormData } from "@/pages/dashboard/feature-toggles/new-feature-toggle-dialog";
 
 export const getFeatureToggles = async (): Promise<FeatureToggle[]> => {
   await mimicServerCall();
@@ -78,4 +79,24 @@ export const filterFeatureToggles = async (
   });
 
   return filteredFeatureToggles.sort((a, b) => a.name.localeCompare(b.name));
+};
+
+export const registerFeatureToggle = async (
+  featureToggle: NewFeatureToggleFormData,
+) => {
+  const featureToggles = await getFeatureToggles();
+  if (!featureToggle.module) {
+    throw new Error("Module is required");
+  }
+
+  const newFeatureToggle: FeatureToggle = {
+    name: featureToggle.name,
+    description: featureToggle.description,
+    module: featureToggle.module,
+    enabledFor: [] as number[],
+    creationDate: format(new Date(), "yyyy-MM-dd"),
+  };
+
+  featureToggles.push(newFeatureToggle);
+  localStorage.setItem("featureToggles", JSON.stringify(featureToggles));
 };

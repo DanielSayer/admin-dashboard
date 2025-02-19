@@ -12,6 +12,7 @@ import { getSubscribers } from "@/server/subscribers";
 import { FilterFormData, FilterPanel } from "./filter-panel";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "motion/react";
+import { NewFeatureToggleDialog } from "./new-feature-toggle-dialog";
 
 export function FeatureTogglesPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,18 +75,21 @@ export function FeatureTogglesPage() {
           onChange={handleSelect}
           isLoading={isLoading}
         />
-        <Button
-          onClick={() => setIsOpen(!isOpen)}
-          className="justify-between"
-          variant="outline"
-        >
-          {isOpen ? "Hide Filters" : "Show Filters"}
-          {isOpen ? (
-            <ChevronUp className="ml-2 h-4 w-4" />
-          ) : (
-            <ChevronDown className="ml-2 h-4 w-4" />
-          )}
-        </Button>
+        <div className="flex items-center gap-2">
+          <NewFeatureToggleDialog />
+          <Button
+            onClick={() => setIsOpen(!isOpen)}
+            className="justify-between"
+            variant="outline"
+          >
+            {isOpen ? "Hide Filters" : "Show Filters"}
+            {isOpen ? (
+              <ChevronUp className="ml-2 h-4 w-4" />
+            ) : (
+              <ChevronDown className="ml-2 h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
 
       <AnimatePresence>
