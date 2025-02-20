@@ -10,9 +10,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createUser } from "@/server/user";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 type UserForm = {
   firstName: string;
@@ -21,6 +22,8 @@ type UserForm = {
 };
 
 export default function SignInPage() {
+  const client = useQueryClient();
+  const navigate = useNavigate();
   const form = useForm<UserForm>({
     defaultValues: {
       firstName: "",
@@ -31,6 +34,10 @@ export default function SignInPage() {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: createUser,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["user"] });
+      navigate("/dashboard");
+    },
   });
 
   const onSubmit = async (data: UserForm) => {

@@ -12,11 +12,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
+import { logOut } from "@/server/user";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LogOut, Settings, Sparkles, User } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function UserProfile() {
   const { user } = useAuth();
+  const client = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationFn: logOut,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
+    },
+  });
 
   if (!user) {
     return null;
@@ -65,10 +77,17 @@ export function UserProfile() {
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="focus:bg-blue-50 dark:focus:bg-blue-950">
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
-        </DropdownMenuItem>
+        <Button
+          asChild
+          variant="ghost"
+          className="flex w-full justify-start p-2"
+          onClick={() => mutate()}
+        >
+          <DropdownMenuItem className="focus:bg-blue-50 dark:focus:bg-blue-950">
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Log out</span>
+          </DropdownMenuItem>
+        </Button>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -33,3 +33,7 @@ export const createUser = async (req: {
 
   return user;
 };
+
+export const logOut = async (): Promise<void> => {
+  localStorage.removeItem("user");
+};
