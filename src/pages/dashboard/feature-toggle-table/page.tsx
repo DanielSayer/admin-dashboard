@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { filterFeatureToggles } from "@/server/feature-toggles";
 import { getSubscribers } from "@/server/subscribers";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { columns } from "./columns";
@@ -44,11 +45,12 @@ export function FeatureFlagsPage() {
             variant="outline"
           >
             {isOpen ? "Hide Filters" : "Show Filters"}
-            {isOpen ? (
-              <ChevronUp className="ml-2 h-4 w-4" />
-            ) : (
-              <ChevronDown className="ml-2 h-4 w-4" />
-            )}
+            <ChevronDown
+              className={cn(
+                "ml-2 h-4 w-4 transition-transform duration-200",
+                isOpen ? "rotate-180" : "rotate-0",
+              )}
+            />
           </Button>
         </div>
       </div>

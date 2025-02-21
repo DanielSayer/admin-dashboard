@@ -10,8 +10,8 @@ import HomePage from "./pages/home/page.tsx";
 import PageWrapper from "./components/layout/page-wrapper.tsx";
 import { DashboardLayout } from "./pages/dashboard/layout.tsx";
 import { DashboardPage } from "./pages/dashboard/page.tsx";
-import { FeatureTogglesPage } from "./pages/dashboard/feature-toggles/page.tsx";
-import { FeatureFlagsPage } from "./pages/dashboard/feature-flags/page.tsx";
+import { FeatureTogglesPage } from "./pages/dashboard/feature-toggle-cards/page.tsx";
+import { FeatureFlagsPage } from "./pages/dashboard/feature-toggle-table/page.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -24,11 +24,11 @@ createRoot(document.getElementById("root")!).render(
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route
-                path="/dashboard/feature-toggles"
+                path="/dashboard/feature-toggle-cards"
                 element={<FeatureTogglesPage />}
               />
               <Route
-                path="/dashboard/feature-flags"
+                path="/dashboard/feature-toggle-table"
                 element={<FeatureFlagsPage />}
               />
               <Route path="/dashboard/*" element={<div>Not implemented</div>} />

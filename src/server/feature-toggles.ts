@@ -3,9 +3,9 @@ import {
   featureToggleDefaults,
 } from "@/lib/mock-data/feature-toggles";
 import { mimicServerCall } from "./lib";
-import { Filters } from "@/pages/dashboard/feature-toggles/filter-panel";
+import { Filters } from "@/pages/dashboard/feature-toggle-cards/filter-panel";
 import { differenceInDays, format } from "date-fns";
-import { NewFeatureToggleFormData } from "@/pages/dashboard/feature-toggles/new-feature-toggle-dialog";
+import { NewFeatureToggleFormData } from "@/pages/dashboard/feature-toggle-cards/new-feature-toggle-dialog";
 
 export const getFeatureToggles = async (): Promise<FeatureToggle[]> => {
   await mimicServerCall();

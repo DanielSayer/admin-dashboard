@@ -26,14 +26,19 @@ import { Link, useLocation } from "react-router";
 
 const features = [
   {
-    title: "Feature Toggles",
-    to: "/dashboard/feature-toggles",
+    title: "Feature Toggle Cards",
+    to: "/dashboard/feature-toggle-cards",
     icon: ToggleRight,
   },
   {
-    title: "Feature Flags",
-    to: "/dashboard/feature-flags",
+    title: "Feature Toggle Table",
+    to: "/dashboard/feature-toggle-table",
     icon: ToggleLeft,
+  },
+  {
+    title: "Feature Toggles",
+    to: "/dashboard/feature-toggles",
+    icon: ToggleRight,
   },
   {
     title: "Permissions",
